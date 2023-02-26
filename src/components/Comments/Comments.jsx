@@ -33,6 +33,7 @@ function Comments() {
             <p>Any comments you'd like to leave?</p>
             <Input onKeyDown={handleKeyDown} autoFocus={true} type="text" name="Comments" onChange={handleChange} value={value} />
             <Button onClick={handleClick}>NEXT</Button>
+            <Button onClick={history.goBack}>Go Back</Button>
         </div>
     )
 }

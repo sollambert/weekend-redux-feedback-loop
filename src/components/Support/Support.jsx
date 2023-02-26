@@ -39,6 +39,7 @@ function Support() {
             <p>How well are you being supported?</p>
             <Input onKeyDown={handleKeyDown} autoFocus={true} type="number" name="Support" placeholder='Select a number 0-5' onChange={handleChange} value={value} />
             <Button onClick={handleClick}>NEXT</Button>
+            <Button onClick={history.goBack}>Go Back</Button>
         </div>
     )
 }

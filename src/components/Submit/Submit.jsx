@@ -50,6 +50,7 @@ function Submit() {
                 <ListItem>Comments: {review.comments}</ListItem>
             </List>
             <Button variant="contained" onClick={handleClick}>Leave New Feedback</Button>
+            <Button onClick={history.goBack}>Go Back</Button>
         </div>
     )
 }

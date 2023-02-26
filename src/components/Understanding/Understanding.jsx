@@ -38,6 +38,7 @@ function Understanding() {
             <p>How well are you understanding the material?</p>
             <Input onKeyDown={handleKeyDown} autoFocus={true} type="number" name="Understanding" placeholder='Select a number 0-5' onChange={handleChange} value={value} />
             <Button onClick={handleClick}>NEXT</Button>
+            <Button onClick={history.goBack}>Go Back</Button>
         </div>
     )
 }
