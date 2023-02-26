@@ -34,7 +34,7 @@ function Submit() {
                 payload: value
             })
             setValue('');
-            history.push('/')
+            history.push('/success')
         })
         .catch((err) => {
             console.error.err;

@@ -9,6 +9,7 @@ import Understanding from '../Understanding/Understanding';
 import Support from '../Support/Support';
 import Submit from '../Submit/Submit';
 import Admin from '../Admin/Admin';
+import Success from '../Success/Success';
 
 function App() {
 
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route exact path="/admin">
             <Admin/>
+          </Route>
+          <Route exact path="/success">
+            <Success/>
           </Route>
         </Router>
     </div>
