@@ -9,16 +9,14 @@ import logger from 'redux-logger';
 
 const review = (state = {}, action) => {
     switch (action.type) {
-        case "SET_FEELINGS":
-            return {...state, feelings: action.payload};
+        case "SET_FEELING":
+            return {...state, feeling: action.payload};
         case "SET_UNDERSTANDING":
             return {...state, understanding: action.payload};
         case "SET_SUPPORT":
-            state.support = action.payload;
-            return state;
+            return {...state, support: action.payload};
         case "SET_COMMENTS":
-            state.comments = action.payload;
-            return state;
+            return {...state, comments: action.payload};
         case "CLEAR_REVIEW":
             state = {};
             return state;

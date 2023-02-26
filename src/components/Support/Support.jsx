@@ -14,6 +14,12 @@ function Support() {
         setValue(e.target.value);
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key == "Enter") {
+            handleClick(e);
+        }
+    }
+
     const handleClick = (e) => {
         dispatch({
             type: 'SET_SUPPORT',
@@ -25,7 +31,8 @@ function Support() {
 
     return (
         <div>
-            <Input type="number" label="Support" placeholder="How supported are you?" onChange={handleChange} value={value} />
+            <p>How well are you being supported?</p>
+            <Input onKeyDown={handleKeyDown} autoFocus={true} type="number" name="Support" placeholder='Select a number 0-5' onChange={handleChange} value={value} />
             <Button onClick={handleClick}>NEXT</Button>
         </div>
     )

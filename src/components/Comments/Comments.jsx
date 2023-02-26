@@ -1,4 +1,4 @@
-import {Input, Button} from '@mui/material'
+import { Input, Button } from '@mui/material'
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
@@ -13,6 +13,12 @@ function Comments() {
         setValue(e.target.value);
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key == "Enter") {
+            handleClick(e);
+        }
+    }
+
     const handleClick = (e) => {
         dispatch({
             type: 'SET_COMMENTS',
@@ -24,7 +30,8 @@ function Comments() {
 
     return (
         <div>
-            <Input type="text" label="Comments" placeholder="Any additional comments?" onChange={handleChange} value={value} />
+            <p>Any comments you'd like to leave?</p>
+            <Input onKeyDown={handleKeyDown} autoFocus={true} type="text" name="Comments" onChange={handleChange} value={value} />
             <Button onClick={handleClick}>NEXT</Button>
         </div>
     )
