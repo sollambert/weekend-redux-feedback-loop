@@ -2,10 +2,42 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App/App';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+
+
+const review = (state = {}, action) => {
+    switch (action.type) {
+        case "SET_FEELINGS":
+            return {...state, feelings: action.payload};
+        case "SET_UNDERSTANDING":
+            return {...state, understanding: action.payload};
+        case "SET_SUPPORT":
+            state.support = action.payload;
+            return state;
+        case "SET_COMMENTS":
+            state.comments = action.payload;
+            return state;
+        case "CLEAR_REVIEW":
+            state = {};
+            return state;
+    }
+    return state;
+}
+
+const store = createStore(
+    combineReducers({
+        review
+    }),
+    applyMiddleware(logger)
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App />
+        <Provider store={store}>
+            <App />
+        </Provider>
     </React.StrictMode>
 );
