@@ -6,6 +6,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 
+const reviews = (state = [], action) => {
+    switch (action.type) {
+        case "SET_REVIEWS":
+            return action.payload;
+        case "CLEAR_REVIEWS":
+            return [];
+    }
+    return state;
+}
 
 const review = (state = {}, action) => {
     switch (action.type) {
@@ -26,7 +35,8 @@ const review = (state = {}, action) => {
 
 const store = createStore(
     combineReducers({
-        review
+        review,
+        reviews
     }),
     applyMiddleware(logger)
 );

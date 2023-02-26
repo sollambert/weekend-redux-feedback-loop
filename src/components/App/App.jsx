@@ -8,6 +8,7 @@ import Comments from '../Comments/Comments';
 import Understanding from '../Understanding/Understanding';
 import Support from '../Support/Support';
 import Submit from '../Submit/Submit';
+import Admin from '../Admin/Admin';
 
 function App() {
 
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route exact path="/submit">
             <Submit/>
+          </Route>
+          <Route exact path="/admin">
+            <Admin/>
           </Route>
         </Router>
     </div>
