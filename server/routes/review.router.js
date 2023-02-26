@@ -3,7 +3,8 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
-    const sqlText = `SELECT * FROM "feedback"`
+    const sqlText = `SELECT * FROM "feedback"
+    ORDER BY id DESC`
     pool.query(sqlText)
     .then((dbRes) => {
         res.send(dbRes.rows);
@@ -31,6 +32,33 @@ router.post('/', (req, res) => {
             review.comments])
     .then((dbRes) => {
         res.sendStatus(201);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    const sqlText = `DELETE FROM "feedback"
+    WHERE id = $1`
+    pool.query(sqlText, [req.params.id])
+    .then((dbRes) => {
+        res.sendStatus(203);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+    })
+})
+
+router.put('/:id', (req, res) => {
+    const sqlText = `UPDATE "feedback"
+    SET flagged = NOT flagged
+    WHERE id = $1`
+    pool.query(sqlText, [req.params.id])
+    .then((dbRes) => {
+        res.sendStatus(203);
     })
     .catch((err) => {
         console.error(err);
