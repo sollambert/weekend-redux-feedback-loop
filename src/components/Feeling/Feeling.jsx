@@ -12,7 +12,7 @@ function Feeling() {
     const handleChange = (e) => {
         setValue(e.target.value);
     }
-    
+
     const handleKeyDown = (e) => {
         if (e.key == "Enter") {
             handleClick(e);
@@ -20,12 +20,17 @@ function Feeling() {
     }
 
     const handleClick = (e) => {
-        dispatch({
-            type: 'SET_FEELING',
-            payload: value
-        })
-        setValue('');
-        history.push('/understanding')
+        if (value > 5 || value < 1 || isNaN(value)) {
+            alert('Please only use numbers 1-5')
+            setValue('');
+        } else {
+            dispatch({
+                type: 'SET_FEELING',
+                payload: value
+            })
+            setValue('');
+            history.push('/understanding')
+        }
     }
 
     return (

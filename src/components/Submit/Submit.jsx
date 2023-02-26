@@ -16,7 +16,16 @@ function Submit() {
         setValue(e.target.value);
     }
 
+    const handleBadData = () => {
+        alert('bad data');
+        history.push('/');
+    }
+
     const handleClick = (e) => {
+        (review.feeling > 5 || review.understanding > 5 || review.support > 5
+            || review.feeling < 1 || review.understanding < 1 || review.support < 1
+            || isNaN(review.feeling) || isNaN(review.understanding) || isNaN(review.support) )
+        ? handleBadData() :
         axios.post('/review', review)
         .then((response) => {
             dispatch({
@@ -35,10 +44,10 @@ function Submit() {
     return (
         <div>
             <List className="submit-list">
-                <ListItem>{review.feeling}</ListItem>
-                <ListItem>{review.understanding}</ListItem>
-                <ListItem>{review.support}</ListItem>
-                <ListItem>{review.comments}</ListItem>
+                <ListItem>Feeling: {review.feeling}</ListItem>
+                <ListItem>Understanding: {review.understanding}</ListItem>
+                <ListItem>Support: {review.support}</ListItem>
+                <ListItem>Comments: {review.comments}</ListItem>
             </List>
             <Button variant="contained" onClick={handleClick}>Leave New Feedback</Button>
         </div>

@@ -1,4 +1,4 @@
-import {Input, Button} from '@mui/material'
+import { Input, Button } from '@mui/material'
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
@@ -21,12 +21,17 @@ function Support() {
     }
 
     const handleClick = (e) => {
-        dispatch({
-            type: 'SET_SUPPORT',
-            payload: value
-        })
-        setValue('');
-        history.push('/comments')
+        if (value > 5 || value < 1 || isNaN(value)) {
+            alert('Please only use numbers 1-5')
+            setValue('');
+        } else {
+            dispatch({
+                type: 'SET_SUPPORT',
+                payload: value
+            })
+            setValue('');
+            history.push('/comments')
+        }
     }
 
     return (

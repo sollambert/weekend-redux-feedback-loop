@@ -5,9 +5,19 @@ const pool = require('../modules/pool');
 router.post('/', (req, res) => {
     const sqlText = `INSERT INTO "feedback" ("feeling", "understanding", "support", "comments")
     VALUES($1, $2, $3, $4);`;
-    // console.log(req.body)
-
-    pool.query(sqlText, [req.body.feeling, req.body.understanding, req.body.support, req.body.comments])
+    const review = req.body;
+    review.feeling = Number(review.feeling);
+    review.understanding = Number(review.understanding);
+    review.support = Number(review.support);
+    (review.feeling > 5 || review.understanding > 5 || review.support > 5
+        || review.feeling < 1 || review.understanding < 1 || review.support < 1
+        || isNaN(review.feeling) || isNaN(review.understanding) || isNaN(review.support) )
+    ? res.sendStatus(400) :
+    pool.query(sqlText,
+        [review.feeling,
+            review.understanding,
+            review.support,
+            review.comments])
     .then((dbRes) => {
         res.sendStatus(201);
     })
