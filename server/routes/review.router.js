@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
+//GET route to pull all reviews from DB in asc order by id
 router.get('/', (req, res) => {
     const sqlText = `SELECT * FROM "feedback"
-    ORDER BY id DESC`
+    ORDER BY id ASC`
     pool.query(sqlText)
     .then((dbRes) => {
         res.send(dbRes.rows);
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
     })
 })
 
+//POST route for adding new review to DB
 router.post('/', (req, res) => {
     const sqlText = `INSERT INTO "feedback" ("feeling", "understanding", "support", "comments")
     VALUES($1, $2, $3, $4);`;
@@ -39,6 +41,7 @@ router.post('/', (req, res) => {
     })
 })
 
+//DELETE route to remove review from DB
 router.delete('/:id', (req, res) => {
     const sqlText = `DELETE FROM "feedback"
     WHERE id = $1`
@@ -52,6 +55,7 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+//PUT route to flip flagged boolean in DB
 router.put('/:id', (req, res) => {
     const sqlText = `UPDATE "feedback"
     SET flagged = NOT flagged

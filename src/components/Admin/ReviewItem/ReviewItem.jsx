@@ -70,7 +70,7 @@ function ReviewItem({review, getReviews}) {
                 {review.comments}
             </Cell>
             <Cell>
-                {new Date(review.date).toLocaleString()}
+                {new Date(review.date).toLocaleDateString()}
             </Cell>
             <Cell>
                 <Button onClick={handleFlag} variant="contained">Flag</Button>

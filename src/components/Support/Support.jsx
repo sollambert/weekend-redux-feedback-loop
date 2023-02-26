@@ -1,7 +1,9 @@
 import { Input, Button } from '@mui/material'
 import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 
 function Support() {
 
@@ -9,6 +11,13 @@ function Support() {
     const [value, setValue] = useState('');
     const history = useHistory();
     const dispatch = useDispatch();
+    const swal = withReactContent(Swal);
+
+    const support = useSelector(store => store.review.support)
+
+    useEffect(() => {
+        setValue(support ? support : '')
+    },[])
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -21,8 +30,9 @@ function Support() {
     }
 
     const handleClick = (e) => {
+        e.preventDefault();
         if (value > 5 || value < 1 || isNaN(value)) {
-            alert('Please only use numbers 1-5')
+            swal.fire({title: 'Please only use numbers 1-5'})
             setValue('');
         } else {
             dispatch({

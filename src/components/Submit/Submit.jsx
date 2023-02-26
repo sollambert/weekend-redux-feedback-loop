@@ -1,7 +1,7 @@
-import { Input, Button, List, ListItem } from '@mui/material'
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { Table, TableHead, TableBody, TableRow, TableCell as Cell, Input, Button } from '@mui/material';
 import axios from 'axios';
 import './Submit.css';
 
@@ -17,10 +17,11 @@ function Submit() {
     }
 
     const handleBadData = () => {
-        alert('bad data');
-        history.push('/');
+        swal.fire({title: 'Please only use numbers 1-5, go back and adjust your values'})
+        //history.push('/');
     }
 
+    //Click listener for submission, checks input validation before sending
     const handleClick = (e) => {
         (review.feeling > 5 || review.understanding > 5 || review.support > 5
             || review.feeling < 1 || review.understanding < 1 || review.support < 1
@@ -43,12 +44,26 @@ function Submit() {
     console.log(review)
     return (
         <div>
-            <List className="submit-list">
-                <ListItem>Feeling: {review.feeling}</ListItem>
-                <ListItem>Understanding: {review.understanding}</ListItem>
-                <ListItem>Support: {review.support}</ListItem>
-                <ListItem>Comments: {review.comments}</ListItem>
-            </List>
+            <Table>
+                <TableBody>
+                    <TableRow>
+                        <Cell>Feeling</Cell>
+                        <Cell>{review.feeling}</Cell>
+                    </TableRow>
+                    <TableRow>
+                        <Cell>Understanding</Cell>
+                        <Cell>{review.understanding}</Cell>
+                    </TableRow>
+                    <TableRow>
+                        <Cell>Support</Cell>
+                        <Cell>{review.support}</Cell>
+                    </TableRow>
+                    <TableRow>
+                        <Cell>Comments</Cell>
+                        <Cell>{review.comments}</Cell>
+                    </TableRow>
+                </TableBody>
+            </Table>
             <Button variant="contained" onClick={handleClick}>Leave New Feedback</Button>
             <Button onClick={history.goBack}>Go Back</Button>
         </div>
